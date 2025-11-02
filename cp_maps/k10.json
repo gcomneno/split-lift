@@ -1,7 +1,5 @@
 {
   "k": 10,
-  "cp": {
-    "11": 10
-  },
-  "notes": "FSLL confermato su p=11: radici distinte in F_11*, c_11=10; t1(11^a)=10*11^(a-1)."
+  "cp": { "11": 10 },
+  "notes": "FSLL confermato su p=11; t1(11^a)=10*11^(a-1)."
 }

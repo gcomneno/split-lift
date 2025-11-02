@@ -1,9 +1,5 @@
 {
   "k": 13,
-  "cp": {
-    "3": 1,
-    "5": 4,
-    "17": 8
-  },
-  "notes": "FSLL pieno su {3,5,17}; t1(m)=lcm(c_p * p^(a-1)) per composti di soli questi primi."
+  "cp": { "3": 1, "5": 4, "17": 8 },
+  "notes": "FSLL pieno su {3,5,17}; t1(m)=lcm(c_p * p^(a-1))."
 }

@@ -1,9 +1,33 @@
-import argparse
+import argparse, json, os
+
 from . import __version__
+from .predict import predict_fsll
 
 def cmd_predict(args):
-    print(f"[splitlift] predict (FSLL fast-path if possible)")
-    print(f"- k={args.k}, m={args.m}, explain={args.explain}, json={args.json}, csv={args.csv}")
+    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    result = predict_fsll(args.k, args.m, repo_root=repo_root)
+    if args.json:
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+    elif args.csv:
+        # summary
+        cols = ["k","m","mode","t1_est","c_m"]
+        print(",".join(cols))
+        print(",".join(str(result.get(c,"")) for c in cols))
+        # per-prime
+        print("\nper_prime")
+        pcols = ["p","a","c_p","t1_p","ok"]
+        print(",".join(pcols))
+        for row in result.get("per_prime", []):
+            print(",".join(str(row.get(c,"")) for c in pcols))
+        return
+    else:
+        print(f"[splitlift] predict k={args.k} m={args.m} → mode={result.get('mode')}")
+        if result.get("mode") == "fsll":
+            print(f"  t1_est={result.get('t1_est')}  c_m={result.get('c_m')}  rule: {result.get('tn_rule')}")
+            for row in result["per_prime"]:
+                print(f"   - p={row['p']}^(a={row['a']}): c_p={row['c_p']} → t1_p={row['t1_p']}")
+        else:
+            print(f"  reason: {result.get('reason')}")
 
 def cmd_verify(args):
     print(f"[splitlift] verify (order checks per-prime/global)")
