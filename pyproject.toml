@@ -1,0 +1,24 @@
+[project]
+name = "splitlift"
+version = "0.0.1"
+description = "Predict → Verify → Measure per ricorrenze mod m (modalità FSLL)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Giancarlo" }]
+keywords = ["number-theory", "modular-arithmetic", "finite-fields", "matrix", "p-adic"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
+
+[project.urls]
+Homepage = "https://github.com/gcomneno/split-lift"
+
+[project.scripts]
+splitlift = "splitlift.cli:main"
+
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
